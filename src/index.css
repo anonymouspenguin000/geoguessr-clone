@@ -1,10 +1,10 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Abel, "Trebuchet MS", Calibri, Arial, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(#000011, #00002f) no-repeat 100% 100%;
+  color: #999;
+  font-size: 25px;
 }
 
 code {
