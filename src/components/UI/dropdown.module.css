@@ -1,0 +1,14 @@
+.dropdown {
+    background: #fff;
+    border-radius: var(--bdrs);
+    overflow: hidden;
+    padding: 5px 15px;
+}
+.dropdown select {
+    border: 0;
+    outline: 0;
+    background: none;
+    font-family: inherit;
+    width: 100%;
+    color: #000;
+}

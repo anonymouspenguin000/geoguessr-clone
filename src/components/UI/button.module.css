@@ -1,0 +1,22 @@
+.button {
+    background: #fff;
+    border-radius: var(--bdrs);
+    padding: 0.5em;
+    border: 0;
+    outline: 0;
+    color: #000;
+}
+.button:active {
+    opacity: 0.8;
+}
+.button[class*="special"] {
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+.button[class*="danger"] {
+    background: #f66;
+}
+.button[class*="block"] {
+    width: 100%;
+}
