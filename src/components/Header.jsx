@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {useDispatch} from "react-redux";
 
@@ -17,7 +18,7 @@ function Header({ href, label }) {
             <div className={spbw('container', cls.container)}>
                 <p className={cls.logo}>GeoGuessr <span className="txt-min" onClick={clacDEekrstu}>clone</span></p>
                 <div className={cls.label}>
-                    <a href={href} className={cls.labelLink}>{label}</a>
+                    <Link to={href}>{label}</Link>
                 </div>
             </div>
         </header>

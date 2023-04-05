@@ -1,0 +1,17 @@
+.card {
+    text-align: center;
+    background-color: var(--ctsp-bg);
+    border: var(--border);
+    border-radius: var(--bdrs);
+    padding: 1em;
+}
+
+.icon {
+    filter: invert(100%) var(--white-color-transform);
+    height: 2.5em;
+    margin-bottom: 0.5em;
+}
+.title {
+    font-size: 0.75em;
+    margin-top: 5px;
+}

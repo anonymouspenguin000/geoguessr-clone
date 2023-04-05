@@ -1,0 +1,9 @@
+{
+  "value": {
+    "max_points": 25000,
+    "pts_second_divider": 120
+  },
+  "regionNames": {
+    "world": "World"
+  }
+}

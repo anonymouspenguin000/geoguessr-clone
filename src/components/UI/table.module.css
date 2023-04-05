@@ -1,0 +1,20 @@
+.table {
+    background-color: var(--ctsp-bg);
+    border: var(--border);
+    border-collapse: separate !important;
+    border-radius: var(--bdrs);
+    overflow: hidden;
+}
+.table thead {
+    background-color: var(--ctsp-bg);
+}
+.table :is(th, td) {
+    border: var(--border);
+    padding: 0.4em;
+}
+.table th {
+    font-weight: bold;
+}
+.table .geolink {
+    padding-right: 1.4em;
+}

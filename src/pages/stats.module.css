@@ -1,0 +1,19 @@
+.summary_row {
+    padding: 10px 0;
+}
+.history {
+    font-size: 25px;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.option_set {
+     display: flex;
+     justify-content: space-around;
+     margin: 0 auto;
+     padding-bottom: 20px;
+     width: 80%;
+ }
+.option_set button {
+     width: 20%;
+ }

@@ -7,7 +7,7 @@ import cls from './home.module.css';
 function Home() {
     return (
         <div>
-            <Header label="Stats" href="stats" />
+            <Header label="Stats" href="/stats" />
             <main className="header-above">
                 <div className="container main-container">
                     <section className="section">

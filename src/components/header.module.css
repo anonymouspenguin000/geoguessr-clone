@@ -23,7 +23,7 @@
     background: url('../assets/img/logo.png') no-repeat 50% 50%;
     content: '';
     display: block;
-    filter: invert(100%) brightness(0.6);
+    filter: invert(100%) var(--white-color-transform);
     float: left;
     height: 50px;
     margin-right: 10px;

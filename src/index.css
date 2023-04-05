@@ -1,9 +1,12 @@
 :root {
     --header-height: 100px;
     --bdrs: 10px;
+    --border: 2px solid;
     --sidebar-border: 5px solid;
+    --white-color-transform: brightness(0.6);
 
     --cprimary: #000020;
+    --ctsp-bg: rgba(255, 255, 255, 0.05);
     --gprimary: linear-gradient(#000011, #00002f);
 }
 
@@ -56,6 +59,12 @@ button, input, textarea {
 .title-center {
     text-align: center;
 }
+.title-l {
+    font-size: 50px;
+}
+.title-s {
+    font-size: 35px;
+}
 .section-title {
     padding: 0.5em 0;
 }
@@ -63,7 +72,6 @@ button, input, textarea {
     line-height: 1.15em;
     padding: 0.25em 0;
 }
-.section-paragraph {}
 .paragraph-center {
     text-align: center;
 }

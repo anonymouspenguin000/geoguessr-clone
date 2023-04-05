@@ -9,28 +9,28 @@ function Footer() {
             <div className={cls.part_top}>
                 <div className={spbw('container', cls.container)}>
                     <div className={cls.section}>
-                        <h3 className={spbw(cls.section_part, cls.section_header)}>
+                        <h3 className={cls.section_header}>
                             Disclaimer
                         </h3>
-                        <p className={spbw(cls.section_part, cls.section_text)}>
+                        <p className={cls.section_text}>
                             I'm not a pirate. I didn't hack any sources. I don't cooperate with pirates or somebody else
                             who's bad... I just took an idea for my own and others' education/experience making web-apps
                             and working with APIs. I don't monetize this project. I encourage you to use the original.
                             Thank you for your attention.
                         </p>
-                        <div className={spbw(cls.section_part, cls.section_image)}>
+                        <div className={cls.section_image}>
                             <a href="https://geoguessr.com/" target="_blank" rel="noreferrer">
-                                <img src={origlogo} alt="GeoGuessr" className="footer-section__image" />
+                                <img src={origlogo} alt="GeoGuessr" />
                             </a>
                         </div>
                     </div>
                     <div className={cls.section}>
-                        <h3 className={spbw(cls.section_part, cls.section_header)}>
+                        <h3 className={cls.section_header}>
                             Contact
                         </h3>
-                        <div className={spbw(cls.section_part, cls.section_list, cls.section_text)}>
+                        <div className={cls.section_text}>
                             <ul className={cls.list}>
-                                <li className={cls.list_item}>
+                                <li>
                                     E-mail:{' '}
                                     <a
                                         href="mailto:anopeng000@gmail.com"
@@ -40,7 +40,7 @@ function Footer() {
                                         anopeng000@gmail.com
                                     </a>
                                 </li>
-                                <li className={cls.list_item}>
+                                <li>
                                     Telegram:{' '}
                                     <a href="https://t.me/vl_pnk" target="_blank" rel="noreferrer">@vl_pnk</a></li>
                             </ul>
@@ -50,13 +50,13 @@ function Footer() {
                         <h3 className={cls.section_header}>
                             Built with...
                         </h3>
-                        <div className={spbw(cls.section_part, cls.section_list, cls.section_text)}>
+                        <div className={cls.section_text}>
                             <ul className={cls.list}>
-                                <li className={cls.list_item}>NPM</li>
-                                <li className={cls.list_item}>JavaScript</li>
-                                <li className={cls.list_item}>ReactJS</li>
-                                <li className={cls.list_item}>Google Maps API</li>
-                                <li className={cls.list_item}>Street View API</li>
+                                <li>NPM</li>
+                                <li>JavaScript</li>
+                                <li>ReactJS</li>
+                                <li>Google Maps API</li>
+                                <li>Street View API</li>
                             </ul>
                         </div>
                     </div>
@@ -64,10 +64,10 @@ function Footer() {
             </div>
             <div className={cls.part_bottom}>
                 <div className={spbw('container', cls.container)}>
-                    <p className={cls.copy}>
+                    <p>
                         &copy; NaN undefined
                     </p>
-                    <p className={cls.github}>
+                    <p>
                         My GitHub:{' '}
                         <a
                             href="https://github.com/anonymouspenguin000"
