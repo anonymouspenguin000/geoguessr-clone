@@ -2,21 +2,17 @@ import PropTypes from "prop-types";
 
 import Table from "./UI/Table";
 
-import calcPoints from "../utils/calc/calc-points";
-import calcAccuracy from "../utils/calc/calc-accuracy";
-import readableDistance from "../utils/readable/readable-distance";
-import calcGeoDistance from "../utils/calc/calc-geo-distance";
-
 import geoUrl from "../utils/geo-url";
 import strCut from "../utils/str-cut";
 import readablePercentage from "../utils/readable/readable-percentage";
 import readableTime from "../utils/readable/readable-time";
 import readableDate from "../utils/readable/readable-date";
+import readableDistance from "../utils/readable/readable-distance";
 
 import gameValues from '../config/game.json';
-import cls from "../pages/stats.module.css";
+import cls from "./history-table.module.css";
 
-function HistoryTable({ className, history }) {
+function HistoryTable({ history }) {
     const colNameOrder = ['id', 'rg', 'gp', 'rp', 'ds', 'ac', 'tm', 'pt', 'dt'];
     const colNames = {
         id: '#',
@@ -31,25 +27,16 @@ function HistoryTable({ className, history }) {
     };
 
     return (
-        <div className={className}>
+        <div>
             <Table
-                className={cls.history}
+                className={cls.table}
                 titles={
                     colNameOrder.map(name => ({
                         id: name,
                         value: colNames[name]
                     }))
                 }
-                data={history.map((row, idx) => {
-                    // This callback is about computing; colReplacer is about rendering - that's why they are split
-                    const rowClone = Object.assign({}, row);
-                    rowClone.id = idx + 1;
-                    rowClone.ds = calcGeoDistance(row.gp, row.rp);
-                    rowClone.ac = calcAccuracy(rowClone.ds);
-                    rowClone.pt = calcPoints(rowClone.ac, row.tm);
-
-                    return colNameOrder.map(name => rowClone[name]);
-                }).reverse()}
+                data={history.map((row) => colNameOrder.map(name => row[name])).reverse()}
                 rowIds={history.map(row => row.dt)}
                 colReplacer={(colId, col, rowIdx) => {
                     if (rowIdx !== undefined) switch (colId) {
@@ -92,11 +79,9 @@ function HistoryTable({ className, history }) {
 }
 
 HistoryTable.propTypes = {
-    className: PropTypes.string,
     history: PropTypes.array
 };
 HistoryTable.defaultProps = {
-    className: '',
     history: []
 };
 
