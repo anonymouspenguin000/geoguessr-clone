@@ -49,6 +49,12 @@ button, input, textarea {
 .txt-min {
     font-size: 0.7em;
 }
+.img-inv {
+    filter: invert(1);
+}
+.invisible {
+    visibility: hidden;
+}
 .header-above {
     padding-top: calc(var(--header-height) + 20px);
 }
@@ -99,6 +105,40 @@ button, input, textarea {
 }
 .checkbox-mr {
     margin-right: 10px;
+}
+
+.widget-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.widget-row-bottom {
+    align-items: flex-end;
+}
+.widget-group {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 10px 20px;
+    position: relative;
+    display: flex;
+    margin: 20px;
+}
+.widget-card {
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+}
+.widget-card img {
+    width: 65px;
+}
+.btn-game {
+    background: none;
+    border: none;
+    outline: none;
+    transition-duration: 0.2s;
+}
+.btn-game:hover {
+    transform: rotate(10deg);
 }
 
 @media screen and (max-width: 799px) {

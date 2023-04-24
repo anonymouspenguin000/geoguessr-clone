@@ -6,8 +6,11 @@
     outline: 0;
     color: #000;
 }
-.button:active {
-    opacity: 0.8;
+.button:hover {
+    opacity: 0.9;
+}
+.button:disabled {
+    color: #666;
 }
 .button[class*="special"] {
     text-transform: uppercase;

@@ -4,6 +4,34 @@
     "pts_second_divider": 120
   },
   "regionNames": {
-    "world": "World"
-  }
+    "wrl": "World",
+    "nam": "North America",
+    "sam": "South America",
+    "eur": "Europe",
+    "asi": "Asia",
+    "afr": "Africa",
+    "aus": "Australia"
+  },
+  "minimapPatterns": [
+    {
+      "w": "15vw",
+      "h": "25vh"
+    },
+    {
+      "w": "20vw",
+      "h": "40vh"
+    },
+    {
+      "w": "30vw",
+      "h": "50vh"
+    },
+    {
+      "w": "45vw",
+      "h": "60vh"
+    },
+    {
+      "w": "60vw",
+      "h": "70vh"
+    }
+  ]
 }

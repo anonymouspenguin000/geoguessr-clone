@@ -1,0 +1,51 @@
+.minimap {
+    --tsdur: 0.5s;
+    width: var(--mm-wid);
+    height: var(--mm-hgt);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-sizing: content-box;
+    transition-duration: var(--tsdur);
+}
+.collapse_zone {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+    transition-duration: 0.5s;
+}
+.btn_row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.btn_row > div {
+    display: flex;
+    column-gap: 5px;
+    align-items: center;
+}
+.tool_btn {
+    padding: 0;
+    background: #fff !important; /* Idk, it does not work without !important */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.tool_btn img {
+    width: 100%;
+}
+.flippable {
+    transition-duration: var(--tsdur);
+}
+.flippable_flipped {
+    transform: rotate(180deg);
+}
+.map {
+    border: 1px solid #fff;
+    flex-grow: 1;
+    margin: 10px 0;
+}
