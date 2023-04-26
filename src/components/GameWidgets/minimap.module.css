@@ -8,13 +8,6 @@
     box-sizing: content-box;
     transition-duration: var(--tsdur);
 }
-.collapse_zone {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    overflow: hidden;
-    transition-duration: 0.5s;
-}
 .btn_row {
     display: flex;
     justify-content: space-between;

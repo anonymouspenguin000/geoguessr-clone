@@ -29,19 +29,25 @@ function Minimap({ children, guessDisabled, onGuess }) {
                     <button
                         className={spbw('btn-game', cls.tool_btn)}
                         onClick={() => setMmPattern(Math.min(mmPattern + 1, mmPatterns.length - 1))}
+                        title="Bigger"
                     >
                         <img src={biggerImg} alt="+" />
                     </button>
                     <button
                         className={spbw('btn-game', cls.tool_btn)}
                         onClick={() => setMmPattern(Math.max(mmPattern - 1, 0))}
+                        title="Smaller"
                     >
                         <img src={smallerImg} alt="-" />
                     </button>
                 </div>
                 <div>
                     <span className={spbw(cls.flippable, mmCollapsed && cls.flippable_flipped)}>
-                        <button className={spbw('btn-game', cls.tool_btn)} onClick={() => setMmCollapsed(!mmCollapsed)}>
+                        <button
+                            className={spbw('btn-game', cls.tool_btn)}
+                            onClick={() => setMmCollapsed(!mmCollapsed)}
+                            title="Collapse"
+                        >
                             <img src={collapseImg} alt="v" />
                         </button>
                     </span>

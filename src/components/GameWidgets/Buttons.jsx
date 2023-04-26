@@ -1,12 +1,12 @@
-import spbw from "../../utils/spbw";
+import PropTypes from "prop-types";
 
+import spbw from "../../utils/spbw";
 import quitImg from '../../assets/img/quit.png';
 import flagImg from '../../assets/img/flag.png';
 import zoomInImg from '../../assets/img/zoomIn.png';
 import zoomOutImg from '../../assets/img/zoomOut.png';
 
 import cls from './buttons.module.css';
-import PropTypes from "prop-types";
 
 function Buttons({ events }) {
     return (

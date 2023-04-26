@@ -122,6 +122,7 @@ button, input, textarea {
     position: relative;
     display: flex;
     margin: 20px;
+    z-index: 100;
 }
 .widget-card {
     margin: 0 10px;
