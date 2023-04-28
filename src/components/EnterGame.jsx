@@ -10,22 +10,21 @@ import spbw from "../utils/spbw";
 import gameValues from '../config/game.json';
 import cls from './enter-game.module.css';
 
-let prefBtnPressTimeout = -1;
-
 function EnterGame({ className }) {
+    const [pressTimeout, setPressTimeout] = useState(-1);
     const [prefOpened, setPrefOpened] = useState(false);
     const [expOpened, setExpOpened] = useState(false);
 
     const prefBtnDown = () => {
-        prefBtnPressTimeout = setTimeout(() => {
+        setPressTimeout(setTimeout(() => {
             if (expOpened) return;
             setExpOpened(true);
-            prefBtnPressTimeout = -1;
-        }, 2000);
+            setPressTimeout(-1);
+        }, 2000));
     };
     const prefBtnClick = evt => {
-        clearTimeout(prefBtnPressTimeout);
-        if (prefBtnPressTimeout + 1) {
+        clearTimeout(pressTimeout);
+        if (pressTimeout + 1) {
             if (prefOpened) {
                 setPrefOpened(false);
                 setExpOpened(false);
@@ -37,7 +36,7 @@ function EnterGame({ className }) {
     return (
         <div className={spbw(cls.enter_game, className)}>
             <form action="/game" method="get">
-                <Dropdown className={cls.form_item} optionList={Object.entries(gameValues.regionNames)} />
+                <Dropdown className={cls.form_item} optionList={Object.entries(gameValues.regionNames)} name="region" />
                 <fieldset hidden={!expOpened} className={spbw('fieldset', cls.form_item)}>
                     <legend className="fieldset-legend">Experiments</legend>
                     <label className="fieldset-item">

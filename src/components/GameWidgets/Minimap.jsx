@@ -15,7 +15,7 @@ import cls from './minimap.module.css';
 const mmPatterns = gameValues.minimapPatterns;
 
 function Minimap({ children, guessDisabled, onGuess }) {
-    const btnRowRef = useRef(null);
+    const btnRowRef = useRef();
     const [mmCollapsed, setMmCollapsed] = useState(false);
     const [mmPattern, setMmPattern] = useState(0);
 

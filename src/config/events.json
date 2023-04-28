@@ -1,0 +1,6 @@
+{
+  "gQuit": "x-game-quit",
+  "gGoToStart": "x-game-go-to-start",
+  "gZoomIn": "x-game-zoom-in",
+  "gZoomOut": "x-game-zoom-out"
+}

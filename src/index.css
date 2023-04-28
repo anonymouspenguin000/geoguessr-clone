@@ -141,6 +141,9 @@ button, input, textarea {
 .btn-game:hover {
     transform: rotate(10deg);
 }
+.pano-no-spoilers a:is([href*="/report"], [href*="/maps"]) {
+    display: none !important;
+}
 
 @media screen and (max-width: 799px) {
     .container {

@@ -5,7 +5,7 @@ import Info from './GameWidgets/Info';
 import Buttons from "./GameWidgets/Buttons";
 import Minimap from "./GameWidgets/Minimap";
 
-function GameUI({className, utils, minimap}) {
+function GameUI({ className, utils, minimap, infoData, buttonEvents }) {
     return (
         <div className={className}>
             <div className="widget-row">
@@ -13,10 +13,10 @@ function GameUI({className, utils, minimap}) {
                     className={!Object.values(utils || {}).some(el => el?.shown) ? 'invisible' : ''}
                     utilData={utils}
                 />
-                <Info infoData={{region: 'wrl'}}/>
+                <Info infoData={infoData}/>
             </div>
             <div className="widget-row widget-row-bottom">
-                <Buttons/>
+                <Buttons events={buttonEvents} />
                 <Minimap {...minimap} />
             </div>
         </div>
@@ -26,12 +26,16 @@ function GameUI({className, utils, minimap}) {
 GameUI.propTypes = {
     className: PropTypes.string,
     utils: PropTypes.object,
-    minimap: PropTypes.object
+    minimap: PropTypes.object,
+    infoData: PropTypes.object,
+    buttonEvents: PropTypes.object
 };
 GameUI.defaultProps = {
     className: '',
     utils: {},
-    minimap: {}
+    minimap: {},
+    infoData: {},
+    buttonEvents: {}
 };
 
 export default GameUI;

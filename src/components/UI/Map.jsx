@@ -1,14 +1,17 @@
 import {useRef, useEffect} from "react";
 import PropTypes from "prop-types";
 
-function Map({ className, options, onMount }) {
+function Map({ className, options, onMount, type = 'map' }) {
     const mapCreated = useRef(false);
     const ref = useRef();
 
     useEffect(() => {
         if (mapCreated.current) return;
-        const map = new window.google.maps.Map(ref.current, options);
-        onMount(map, ref);
+        const map = new window.google.maps[{
+            map: 'Map',
+            pano: 'StreetViewPanorama'
+        }[type]](ref.current, options);
+        onMount?.(map, ref);
         mapCreated.current = true;
     });
 
@@ -23,7 +26,7 @@ Map.propTypes = {
 };
 Map.defaultProps = {
     className: '',
-    onMount: {},
+    onMount: () => {},
     effect: () => {}
 };
 
