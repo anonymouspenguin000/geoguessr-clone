@@ -1,5 +1,5 @@
 import {Wrapper} from '@googlemaps/react-wrapper';
-import {useState, useRef} from 'react';
+import {useState, useRef, useEffect} from 'react';
 
 import GameUI from '../components/GameUI';
 import GameResults from "../components/GameResults";
@@ -14,11 +14,12 @@ import guessPin from '../assets/img/guess-pin.png';
 import realPin from '../assets/img/real-pin.png';
 
 import api from '../config/api';
+import storageValues from '../config/storage.json';
 import eventValues from '../config/events.json';
 import cls from './game.module.css';
 
 // <Temp>
-const tempLoc = [42.345573, -71.098326];
+const realPos = [42.345573, -71.098326];
 // </Temp>
 
 window.addEventListener(eventValues.gQuit, () => {
@@ -47,6 +48,7 @@ function Game() {
         timer: {
             shown: getParams.timer === 'on',
             time: 0,
+            gts: -Infinity,
             itvId: -1,
             nextSec() {
                 this.time++;
@@ -56,12 +58,16 @@ function Game() {
     }).current;
     utils.compass.ref = useRef();
     utils.timer.ref = useRef();
-    window.onbeforeunload = () => true;
 
     const markers = useRef([]);
     const [panoLoaded, setPanoLoaded] = useState(false);
+
     const [guessPos, setGuessPos] = useState(null);
     const [gameEnd, setGameEnd] = useState(false);
+
+    useEffect(() => {
+        window.onbeforeunload = () => true;
+    }, []);
 
     const removeAllPins = () => {
         markers.current.forEach(el => el.setMap(null));
@@ -79,57 +85,16 @@ function Game() {
     }
     const setZoom = (pano, zoom, incr = false) => pano.setZoom(incr ? pano.getZoom() + zoom : zoom);
 
-    /*const minimap = <div style={{width: '100%', height: '100%'}}>
-        <Wrapper apiKey={api.googleMapsApiKey}>
-            <Map
-                className={cls.minimap}
-                options={{
-                    center: {lat: 0, lng: 0},
-                    minZoom: 2,
-                    zoom: 2,
-                    disableDefaultUI: true,
-                    mapTypeControl: true,
-                    zoomControl: true
-                }}
-                onMount={map => {
-                    const lst = map.addListener('click', evt => {
-                        const pos = evt.latLng;
-                        removeAllPins();
-                        placePin(map, pos, guessPin);
-                        setGuessPos([pos.lat(), pos.lng()]);
-                    });
-                    window.addEventListener(eventValues.gEnd, (event) => {
-                        const {guessPos, markers} = event.detail;
-
-                        window.google.maps.event.removeListener(lst);
-                        map.setOptions({
-                            center: {lat: 0, lng: 0},
-                            zoom: 1,
-                            minZoom: 1,
-                            disableDefaultUI: true
-                        });
-
-                        removeAllPins();
-                        placePin(map, arrToLLObj(guessPos), guessPin, geoUrl(guessPos));
-                        placePin(map, arrToLLObj(tempLoc), realPin, geoUrl(tempLoc));
-
-                        setTimeout(() => {
-                            const bounds = new window.google.maps.LatLngBounds();
-                            markers.current.forEach(m => bounds.extend(m.position));
-                            map.fitBounds(bounds);
-                        }, 1500);
-                    });
-                }}
-            />
-        </Wrapper>
-    </div>;*/
-    // const mmSrcRef = useRef();
-    // const mmDestRef = useRef();
-
     return (
         <div className={cls.game}>
             {gameEnd
                 ? <GameResults
+                    className={cls.results}
+                    data={{
+                        region: getParams.region,
+                        guessPos, realPos,
+                        time: utils.timer.time
+                    }}
                     map={<Wrapper apiKey={api.googleMapsApiKey}>
                         <Map
                             className={cls.minimap}
@@ -142,13 +107,19 @@ function Game() {
                             onMount={map => {
                                 removeAllPins();
                                 placePin(map, arrToLLObj(guessPos), guessPin, geoUrl(guessPos));
-                                placePin(map, arrToLLObj(tempLoc), realPin, geoUrl(tempLoc));
+                                placePin(map, arrToLLObj(realPos), realPin, geoUrl(realPos));
 
-                                setTimeout(() => {
-                                    const bounds = new window.google.maps.LatLngBounds();
-                                    markers.current.forEach(m => bounds.extend(m.position));
-                                    map.fitBounds(bounds);
-                                }, 1500);
+                                let mapLoaded = false;
+
+                                map.addListener('tilesloaded', () => {
+                                    if (mapLoaded) return;
+                                    setTimeout(() => {
+                                        const bounds = new window.google.maps.LatLngBounds();
+                                        markers.current.forEach(m => bounds.extend(m.position));
+                                        map.fitBounds(bounds);
+                                    }, 1000);
+                                    mapLoaded = true;
+                                });
                             }}
                         />
                     </Wrapper>}
@@ -157,58 +128,43 @@ function Game() {
                     className={cls.ui}
                     utils={utils}
                     minimap={{
-                        children: <div style={{width: '100%', height: '100%'}}>
-                            <Wrapper apiKey={api.googleMapsApiKey}>
-                                <Map
-                                    className={cls.minimap}
-                                    options={{
-                                        center: {lat: 0, lng: 0},
-                                        minZoom: 2,
-                                        zoom: 2,
-                                        disableDefaultUI: true,
-                                        mapTypeControl: true,
-                                        zoomControl: true
-                                    }}
-                                    onMount={map => {
-                                        map.addListener('click', evt => {
-                                            const pos = evt.latLng;
-                                            removeAllPins();
-                                            placePin(map, pos, guessPin);
-                                            setGuessPos([pos.lat(), pos.lng()]);
-                                        });
-                                        window.addEventListener(eventValues.gEnd, (event) => {
-                                            /*const {guessPos, markers} = event.detail;
-
-                                            window.google.maps.event.removeListener(lst);
-                                            map.setOptions({
-                                                center: {lat: 0, lng: 0},
-                                                zoom: 1,
-                                                minZoom: 1,
-                                                disableDefaultUI: true
-                                            });
-
-                                            removeAllPins();
-                                            placePin(map, arrToLLObj(guessPos), guessPin, geoUrl(guessPos));
-                                            placePin(map, arrToLLObj(tempLoc), realPin, geoUrl(tempLoc));
-
-                                            /!*setTimeout(() => {
-                                                mmDestRef.current?.append(mmSrcRef.current);
-                                            }, 500);*!/
-                                            setTimeout(() => {
-                                                const bounds = new window.google.maps.LatLngBounds();
-                                                markers.current.forEach(m => bounds.extend(m.position));
-                                                map.fitBounds(bounds);
-                                            }, 1500);*/
-                                        });
-                                    }}
-                                />
-                            </Wrapper>
-                        </div>,
+                        children: <Wrapper apiKey={api.googleMapsApiKey}>
+                            <Map
+                                className={cls.minimap}
+                                options={{
+                                    center: {lat: 0, lng: 0},
+                                    minZoom: 2,
+                                    zoom: 2,
+                                    disableDefaultUI: true,
+                                    mapTypeControl: true,
+                                    zoomControl: true
+                                }}
+                                onMount={map => {
+                                    map.addListener('click', evt => {
+                                        const pos = evt.latLng;
+                                        removeAllPins();
+                                        placePin(map, pos, guessPin);
+                                        setGuessPos([pos.lat(), pos.lng()]);
+                                    });
+                                }}
+                            />
+                        </Wrapper>,
                         guessDisabled: !guessPos,
                         onGuess() {
                             if (!panoLoaded || !window.confirm('Are you sure?')) return;
                             clearInterval(utils.timer.itvId);
-                            //window.dispatchEvent(new CustomEvent(eventValues.gEnd, {detail: {guessPos, markers}}));
+
+                            utils.timer.gts = Date.now();
+
+                            const last = JSON.parse(localStorage.getItem(storageValues.hist) || '[]');
+                            localStorage.setItem(storageValues.hist, JSON.stringify([...last, {
+                                rg: getParams.region,
+                                gp: guessPos,
+                                rp: realPos,
+                                tm: utils.timer.gts
+                            }]));
+
+                            window.onbeforeunload = null;
                             setGameEnd(true);
                         }
                     }}
@@ -231,13 +187,13 @@ function Game() {
                     }}
                 />
             }
-            <div className={cls.pano}>
+            {!gameEnd && <div className={cls.pano}>
                 <Wrapper apiKey={api.googleMapsApiKey}>
                     <Map
                         type="pano"
                         className={spbw(cls.pano, 'pano-no-spoilers')}
                         options={{
-                            position: arrToLLObj(tempLoc),
+                            position: arrToLLObj(realPos),
                             pov: {
                                 heading: Math.random() * 360,
                                 pitch: 0
@@ -254,13 +210,13 @@ function Game() {
                                 setPanoLoaded(true);
                             });
                             pano.addListener('pov_changed', () => utils.compass.setAngle(360 - pano.getPov().heading));
-                            window.addEventListener(eventValues.gGoToStart, () => pano.setPosition(tempLoc));
+                            window.addEventListener(eventValues.gGoToStart, () => pano.setPosition(realPos));
                             window.addEventListener(eventValues.gZoomIn, () => setZoom(pano, 0.5, true));
                             window.addEventListener(eventValues.gZoomOut, () => setZoom(pano, -0.5, true));
                         }}
                     />
                 </Wrapper>
-            </div>
+            </div>}
         </div>
     );
 }

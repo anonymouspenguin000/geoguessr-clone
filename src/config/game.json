@@ -1,7 +1,8 @@
 {
   "value": {
-    "max_points": 25000,
-    "pts_second_divider": 120
+    "maxPoints": 25000,
+    "tpeTime": 30,
+    "tpeMul": 0.03
   },
   "regionNames": {
     "wrl": "World",
