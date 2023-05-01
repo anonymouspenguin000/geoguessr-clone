@@ -8,7 +8,8 @@ import Map from "../components/UI/Map";
 import readableTime from "../utils/readable/readable-time";
 import spbw from "../utils/spbw";
 import geoUrl from "../utils/geo-url";
-import arrToLLObj from "../utils/arrToLLObj";
+import arrToLLObj from "../utils/arr-to-ll-obj";
+import fixedCoords from "../utils/fixed-coords";
 
 import guessPin from '../assets/img/guess-pin.png';
 import realPin from '../assets/img/real-pin.png';
@@ -89,7 +90,6 @@ function Game() {
         <div className={cls.game}>
             {gameEnd
                 ? <GameResults
-                    className={cls.results}
                     data={{
                         region: getParams.region,
                         guessPos, realPos,
@@ -137,14 +137,15 @@ function Game() {
                                     zoom: 2,
                                     disableDefaultUI: true,
                                     mapTypeControl: true,
-                                    zoomControl: true
+                                    zoomControl: true,
+                                    controlSize: 30
                                 }}
                                 onMount={map => {
                                     map.addListener('click', evt => {
                                         const pos = evt.latLng;
                                         removeAllPins();
                                         placePin(map, pos, guessPin);
-                                        setGuessPos([pos.lat(), pos.lng()]);
+                                        setGuessPos(fixedCoords([+pos.lat(), +pos.lng()]));
                                     });
                                 }}
                             />
@@ -157,11 +158,13 @@ function Game() {
                             utils.timer.gts = Date.now();
 
                             const last = JSON.parse(localStorage.getItem(storageValues.hist) || '[]');
-                            localStorage.setItem(storageValues.hist, JSON.stringify([...last, {
+                            const params = JSON.parse(localStorage.getItem(storageValues.pref) || '{}');
+                            if (!params.pauseProgress) localStorage.setItem(storageValues.hist, JSON.stringify([...last, {
                                 rg: getParams.region,
                                 gp: guessPos,
                                 rp: realPos,
-                                tm: utils.timer.gts
+                                tm: utils.timer.time,
+                                dt: utils.timer.gts
                             }]));
 
                             window.onbeforeunload = null;

@@ -4,6 +4,7 @@
     --border: 2px solid;
     --sidebar-border: 5px solid;
     --white-color-transform: brightness(0.6);
+    --size-mul: 1;
 
     --cprimary: #000020;
     --ctsp-bg: rgba(255, 255, 255, 0.05);
@@ -118,19 +119,20 @@ button, input, textarea {
 .widget-group {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-    padding: 10px 20px;
+    padding: calc(10px * var(--size-mul)) calc(20px * var(--size-mul));
     position: relative;
     display: flex;
     margin: 20px;
     z-index: 100;
+    font-size: calc(1em * var(--size-mul));
 }
 .widget-card {
-    margin: 0 10px;
+    margin: 0 calc(10px * var(--size-mul));
     display: flex;
     align-items: center;
 }
 .widget-card img {
-    width: 65px;
+    width: calc(65px * var(--size-mul));
 }
 .btn-game {
     background: none;
@@ -145,11 +147,26 @@ button, input, textarea {
     display: none !important;
 }
 
+@media screen and (max-width: 1119px) {
+    .table-wrapper {
+        overflow-x: scroll;
+    }
+    .table-wrapper:before {
+        display: block;
+        content: 'Scrollable';
+    }
+    .table-wrapper table {
+        width: auto;
+    }
+}
 @media screen and (max-width: 799px) {
     .container {
         width: 75%;
     }
     .main-container {
         padding: 0;
+    }
+    .widget-group {
+        --size-mul: 0.5;
     }
 }

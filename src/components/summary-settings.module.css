@@ -8,3 +8,15 @@
 .option_set button {
     width: 20%;
 }
+
+@media screen and (max-width: 799px) {
+    .option_set {
+        flex-direction: column;
+        justify-content: normal;
+        align-items: center;
+        row-gap: 10px;
+    }
+    .option_set button {
+        width: 80%;
+    }
+}

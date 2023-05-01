@@ -97,7 +97,7 @@ function GameResults({ className, map, data }) {
                         <div className={cls.row}>
                             <p className={cls.col}>
                                 {/* eslint-disable-next-line */}
-                                <a href="#" onClick={(e) => {
+                                <a className={cls.show_formulas} href="#" onClick={(e) => {
                                     alert(formulas);
                                     e.preventDefault();
                                 }}>Show accuracy & points formulas</a>

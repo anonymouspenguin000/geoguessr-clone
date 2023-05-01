@@ -1,3 +1,6 @@
 .btn {
-    padding: 0 10px;
+    padding: 0 calc(10px * var(--size-mul));
+}
+.btn img {
+    width: calc(50px * var(--size-mul));
 }

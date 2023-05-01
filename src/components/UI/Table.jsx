@@ -27,26 +27,26 @@ function Table({ className, titles, data, rowIds, colReplacer }) {
     return (
         <table className={spbw(cls.table, className)}>
             {!!titles.length && <thead>
-                <tr>
-                    {titles.map(title => {
-                        const {$: inner, ...colProps} = getColData(getTitleId(title), title.value);
-                        return <th {...colProps}>{inner}</th>
-                    })}
-                </tr>
+            <tr>
+                {titles.map(title => {
+                    const {$: inner, ...colProps} = getColData(getTitleId(title), title.value);
+                    return <th {...colProps}>{inner}</th>
+                })}
+            </tr>
             </thead>}
             <tbody>
-                {data.map((row, rowIdx) => {
-                    const rowId = rowIds[rowIdx] ?? utsFn();
-                    return <tr key={rowId}>
-                        {titles
-                            .map((_ign, idx) => row[idx] ?? '')
-                            .slice(0, titles.length)
-                            .map((col, colIdx) => {
-                                const {$: inner, ...colProps} = getColData(getTitleIdByIdx(colIdx), col, rowIdx);
-                                return <td {...colProps}>{inner}</td>
-                            })}
-                    </tr>
-                })}
+            {data.map((row, rowIdx) => {
+                const rowId = rowIds[rowIdx] ?? utsFn();
+                return <tr key={rowId}>
+                    {titles
+                        .map((_ign, idx) => row[idx] ?? '')
+                        .slice(0, titles.length)
+                        .map((col, colIdx) => {
+                            const {$: inner, ...colProps} = getColData(getTitleIdByIdx(colIdx), col, rowIdx);
+                            return <td {...colProps}>{inner}</td>
+                        })}
+                </tr>
+            })}
             </tbody>
         </table>
     );

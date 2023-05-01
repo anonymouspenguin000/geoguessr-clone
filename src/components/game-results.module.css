@@ -41,3 +41,21 @@
     font-size: 35px;
     text-align: center;
 }
+
+@media screen and (max-width: 1219px) {
+    .main {
+        font-size: 30px;
+    }
+}
+@media screen and (max-width: 799px) {
+    .row {
+        display: block;
+    }
+    .col {
+        text-align: center !important;
+        word-break: break-word;
+    }
+    .show_formulas {
+        display: none;
+    }
+}

@@ -6,3 +6,25 @@
 .card {
     width: 19%;
 }
+
+@media screen and (max-width: 1439px){
+    .card {
+        width: 25%;
+    }
+}
+@media screen and (max-width: 1119px) {
+    .row {
+        flex-direction: column;
+        justify-content: normal;
+        align-items: center;
+        row-gap: 30px;
+    }
+    .card {
+        width: 60%;
+    }
+}
+@media screen and (max-width: 499px) {
+    .card {
+        width: 90%;
+    }
+}

@@ -27,7 +27,7 @@ function HistoryTable({ history }) {
     };
 
     return (
-        <div>
+        <div className="table-wrapper">
             <Table
                 className={cls.table}
                 titles={

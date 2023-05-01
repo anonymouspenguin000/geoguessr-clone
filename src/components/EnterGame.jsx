@@ -39,14 +39,11 @@ function EnterGame({ className }) {
                 <Dropdown className={cls.form_item} optionList={Object.entries(gameValues.regionNames)} name="region" />
                 <fieldset hidden={!expOpened} className={spbw('fieldset', cls.form_item)}>
                     <legend className="fieldset-legend">Experiments</legend>
-                    <label className="fieldset-item">
-                        <Checkbox name="alwsmlscrn" className="checkbox checkbox-mr"/>
-                        Allow small screen
-                    </label>
-                    <label className="fieldset-item">
-                        <Checkbox name="noimg" className="checkbox checkbox-mr"/>
-                        No images
-                    </label>
+                    {/*<label className="fieldset-item">*/}
+                    {/*    <Checkbox name="smlscrn" className="checkbox checkbox-mr"/>*/}
+                    {/*    Small screen*/}
+                    {/*</label>*/}
+                    Empty :(
                 </fieldset>
                 <fieldset hidden={!prefOpened} className={spbw('fieldset', cls.form_item)}>
                     <legend className="fieldset-legend">Preferences</legend>

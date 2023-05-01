@@ -22,8 +22,8 @@
     padding: 0;
     background: #fff !important; /* Idk, it does not work without !important */
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: calc(30px * var(--size-mul));
+    height: calc(30px * var(--size-mul));
     display: inline-flex;
     align-items: center;
     justify-content: center;
