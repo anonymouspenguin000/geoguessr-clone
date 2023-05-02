@@ -34,10 +34,14 @@ function SummarySection({ history }) {
         smBest.time = Math.min(smBest.time, el.tm);
         smBest.points = Math.max(smBest.points, el.pt);
     });
-    const smAverage = {
+    const smAverage = history.length ? {
         accuracy: smTotal.accuracy / history.length,
         time: ~~(smTotal.time / history.length),
         points: ~~(smTotal.points / history.length)
+    } : {
+        accuracy: 0,
+        time: Infinity,
+        points: 0
     };
 
     return (

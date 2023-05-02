@@ -9,6 +9,7 @@ import readableTime from "../utils/readable/readable-time";
 import spbw from "../utils/spbw";
 import geoUrl from "../utils/geo-url";
 import arrToLLObj from "../utils/arr-to-ll-obj";
+import genRandomCoords from "../utils/gen-random-coords";
 import fixedCoords from "../utils/fixed-coords";
 
 import guessPin from '../assets/img/guess-pin.png';
@@ -20,7 +21,8 @@ import eventValues from '../config/events.json';
 import cls from './game.module.css';
 
 // <Temp>
-const realPos = [42.345573, -71.098326];
+//const realPos = [42.345573, -71.098326];
+//const realPos = [48.156692, 11.399507];
 // </Temp>
 
 window.addEventListener(eventValues.gQuit, () => {
@@ -61,8 +63,9 @@ function Game() {
     utils.timer.ref = useRef();
 
     const markers = useRef([]);
-    const [panoLoaded, setPanoLoaded] = useState(false);
+    //const panoLoaded = useRef(false);
 
+    const realPos = useRef();
     const [guessPos, setGuessPos] = useState(null);
     const [gameEnd, setGameEnd] = useState(false);
 
@@ -92,8 +95,9 @@ function Game() {
                 ? <GameResults
                     data={{
                         region: getParams.region,
-                        guessPos, realPos,
-                        time: utils.timer.time
+                        realPos: realPos.current,
+                        time: utils.timer.time,
+                        guessPos
                     }}
                     map={<Wrapper apiKey={api.googleMapsApiKey}>
                         <Map
@@ -107,7 +111,7 @@ function Game() {
                             onMount={map => {
                                 removeAllPins();
                                 placePin(map, arrToLLObj(guessPos), guessPin, geoUrl(guessPos));
-                                placePin(map, arrToLLObj(realPos), realPin, geoUrl(realPos));
+                                placePin(map, arrToLLObj(realPos.current), realPin, geoUrl(realPos.current));
 
                                 let mapLoaded = false;
 
@@ -152,7 +156,7 @@ function Game() {
                         </Wrapper>,
                         guessDisabled: !guessPos,
                         onGuess() {
-                            if (!panoLoaded || !window.confirm('Are you sure?')) return;
+                            if (!realPos.current || !window.confirm('Are you sure?')) return;
                             clearInterval(utils.timer.itvId);
 
                             utils.timer.gts = Date.now();
@@ -162,7 +166,7 @@ function Game() {
                             if (!params.pauseProgress) localStorage.setItem(storageValues.hist, JSON.stringify([...last, {
                                 rg: getParams.region,
                                 gp: guessPos,
-                                rp: realPos,
+                                rp: realPos.current,
                                 tm: utils.timer.time,
                                 dt: utils.timer.gts
                             }]));
@@ -176,12 +180,15 @@ function Game() {
                             window.dispatchEvent(new CustomEvent(eventValues.gQuit));
                         },
                         goToStart() {
+                            if (!realPos.current) return;
                             window.dispatchEvent(new CustomEvent(eventValues.gGoToStart));
                         },
                         zoomIn() {
+                            if (!realPos.current) return;
                             window.dispatchEvent(new CustomEvent(eventValues.gZoomIn));
                         },
                         zoomOut() {
+                            if (!realPos.current) return;
                             window.dispatchEvent(new CustomEvent(eventValues.gZoomOut));
                         }
                     }}
@@ -196,7 +203,6 @@ function Game() {
                         type="pano"
                         className={spbw(cls.pano, 'pano-no-spoilers')}
                         options={{
-                            position: arrToLLObj(realPos),
                             pov: {
                                 heading: Math.random() * 360,
                                 pitch: 0
@@ -206,14 +212,37 @@ function Game() {
                             linksControl: true
                         }}
                         onMount={pano => {
-                            pano.addListener('pano_changed', () => {
-                                if (panoLoaded) return;
-                                pano.setZoom(0);
-                                utils.timer.itvId = setInterval(() => utils.timer.nextSec(), 1000);
-                                setPanoLoaded(true);
-                            });
+                            const svSvc = new window.google.maps.StreetViewService();
+
+                            function getRandomLocation(n = 0) {
+                                if (n >= 5) {
+                                    console.log('Could not find a random location within 5 attempts');
+                                    return;
+                                }
+                                /*const currand = {
+                                    lat: randomMinMax(48.216309, 48.079705, 6),
+                                    lng: randomMinMax(11.387509, 11.684724, 6)
+                                };*/
+                                svSvc.getPanorama({
+                                    location: arrToLLObj(genRandomCoords(getParams.region)),
+                                    radius: 100
+                                }).then(({ data }) => {
+                                    const loc = data.location;
+                                    realPos.current = [loc.latLng.lat(), loc.latLng.lng()];
+                                    pano.setPano(loc.pano);
+                                    pano.setZoom(0);
+                                    utils.timer.itvId = setInterval(() => utils.timer.nextSec(), 1000);
+                                }).catch((e => e.code === 'ZERO_RESULTS' && getRandomLocation(n + 1)));
+                            }
+                            getRandomLocation();
+
+                            // pano.addListener('pano_changed', () => {
+                            //     if (panoLoaded.current) return;
+                            //
+                            //     panoLoaded.current = true;
+                            // });
                             pano.addListener('pov_changed', () => utils.compass.setAngle(360 - pano.getPov().heading));
-                            window.addEventListener(eventValues.gGoToStart, () => pano.setPosition(realPos));
+                            window.addEventListener(eventValues.gGoToStart, () => pano.setPosition(arrToLLObj(realPos.current)));
                             window.addEventListener(eventValues.gZoomIn, () => setZoom(pano, 0.5, true));
                             window.addEventListener(eventValues.gZoomOut, () => setZoom(pano, -0.5, true));
                         }}
