@@ -222,7 +222,7 @@ function Game() {
                                 }).then(({ data }) => {
                                     const loc = data.location;
                                     if (!data.links.length) return getRandomLocation(n);
-                                    console.log(data);
+                                    console.log(loc);
                                     realPos.current = [loc.latLng.lat(), loc.latLng.lng()];
                                     pano.setPano(loc.pano);
                                     pano.setZoom(0);

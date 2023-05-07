@@ -4,6 +4,8 @@ import randChance from "./rand-chance";
 import randRange from "./rand-range";
 
 import geoPolygons from '../config/geo-polygons.json';
+// Just a note:
+// JSON.stringify(obj.map(el => el.map(el => el.map(el => +el.toFixed(6)))));
 
 function allPolygons(obj) { // I think it will be useful when I make nested regions
     if (obj instanceof Array) return obj;
