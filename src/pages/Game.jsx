@@ -10,7 +10,6 @@ import spbw from "../utils/spbw";
 import geoUrl from "../utils/geo-url";
 import arrToLLObj from "../utils/arr-to-ll-obj";
 import genRandomCoords from "../utils/gen-random-coords";
-import fixedCoords from "../utils/fixed-coords";
 
 import guessPin from '../assets/img/guess-pin.png';
 import realPin from '../assets/img/real-pin.png';
@@ -149,7 +148,7 @@ function Game() {
                                         const pos = evt.latLng;
                                         removeAllPins();
                                         placePin(map, pos, guessPin);
-                                        setGuessPos(fixedCoords([+pos.lat(), +pos.lng()]));
+                                        setGuessPos([+pos.lat(), +pos.lng()]);
                                     });
                                 }}
                             />
@@ -214,33 +213,24 @@ function Game() {
                         onMount={pano => {
                             const svSvc = new window.google.maps.StreetViewService();
 
-                            function getRandomLocation(n = 0) {
-                                if (n >= 5) {
-                                    console.log('Could not find a random location within 5 attempts');
-                                    return;
-                                }
-                                /*const currand = {
-                                    lat: randomMinMax(48.216309, 48.079705, 6),
-                                    lng: randomMinMax(11.387509, 11.684724, 6)
-                                };*/
+                            function getRandomLocation(n = 1) {
+                                if (n <= 0) return;
+                                console.log(n);
                                 svSvc.getPanorama({
                                     location: arrToLLObj(genRandomCoords(getParams.region)),
-                                    radius: 100
+                                    radius: 10000
                                 }).then(({ data }) => {
                                     const loc = data.location;
+                                    if (!data.links.length) return getRandomLocation(n);
+                                    console.log(data);
                                     realPos.current = [loc.latLng.lat(), loc.latLng.lng()];
                                     pano.setPano(loc.pano);
                                     pano.setZoom(0);
                                     utils.timer.itvId = setInterval(() => utils.timer.nextSec(), 1000);
-                                }).catch((e => e.code === 'ZERO_RESULTS' && getRandomLocation(n + 1)));
+                                }).catch((e => e.code === 'ZERO_RESULTS' && getRandomLocation(n - 1)));
                             }
-                            getRandomLocation();
+                            getRandomLocation(10);
 
-                            // pano.addListener('pano_changed', () => {
-                            //     if (panoLoaded.current) return;
-                            //
-                            //     panoLoaded.current = true;
-                            // });
                             pano.addListener('pov_changed', () => utils.compass.setAngle(360 - pano.getPov().heading));
                             window.addEventListener(eventValues.gGoToStart, () => pano.setPosition(arrToLLObj(realPos.current)));
                             window.addEventListener(eventValues.gZoomIn, () => setZoom(pano, 0.5, true));
