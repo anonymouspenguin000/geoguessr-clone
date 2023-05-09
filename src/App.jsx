@@ -1,7 +1,7 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 
-import {routes} from "./router";
+import {routes} from './router';
 
 function App() {
     const acDEekrstu = useSelector(state => state.common.acDEekrstu);

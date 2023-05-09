@@ -1,6 +1,6 @@
-import Home from "../pages/Home";
-import Stats from '../pages/Stats';
-import Game from "../pages/Game";
+import Home from "../pages/Home/Home";
+import Stats from '../pages/Stats/Stats';
+import Game from "../pages/Game/Game";
 
 export const routes = [
     {path: '/', element: () => <Home />},
