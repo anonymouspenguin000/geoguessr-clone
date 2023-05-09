@@ -13,13 +13,7 @@ function allPolygons(obj) { // I think it will be useful when I make nested regi
 }
 
 export default function genRandomCoords(region) {
-    const regPlg = allPolygons(region === 'wrl' ? geoPolygons : geoPolygons[region]).map(el => {
-        const lt1 = el[0][0];
-        const lt2 = el[1][0];
-        const ln1 = el[0][1];
-        const ln2 = el[1][1];
-        return [[Math.min(lt1, lt2), Math.min(ln1, ln2)], [Math.max(lt1, lt2), Math.max(ln1, ln2)]];
-    });
+    const regPlg = allPolygons(region === 'wrl' ? geoPolygons : geoPolygons[region]);
     const proportions = scaleArray(regPlg.map(el => calcGeoArea(...el)), 10000, 6);
 
     const randPlg = regPlg[randChance(proportions)];

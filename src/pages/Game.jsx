@@ -19,11 +19,6 @@ import storageValues from '../config/storage.json';
 import eventValues from '../config/events.json';
 import cls from './game.module.css';
 
-// <Temp>
-//const realPos = [42.345573, -71.098326];
-//const realPos = [48.156692, 11.399507];
-// </Temp>
-
 window.addEventListener(eventValues.gQuit, () => {
     window.location.href = '/';
 });
@@ -62,9 +57,8 @@ function Game() {
     utils.timer.ref = useRef();
 
     const markers = useRef([]);
-    //const panoLoaded = useRef(false);
-
     const realPos = useRef();
+
     const [guessPos, setGuessPos] = useState(null);
     const [gameEnd, setGameEnd] = useState(false);
 
@@ -133,7 +127,7 @@ function Game() {
                     minimap={{
                         children: <Wrapper apiKey={api.googleMapsApiKey}>
                             <Map
-                                className={cls.minimap}
+                                className={spbw(cls.minimap, cls.place_point)}
                                 options={{
                                     center: {lat: 0, lng: 0},
                                     minZoom: 2,
@@ -215,14 +209,12 @@ function Game() {
 
                             function getRandomLocation(n = 1) {
                                 if (n <= 0) return;
-                                console.log(n);
                                 svSvc.getPanorama({
                                     location: arrToLLObj(genRandomCoords(getParams.region)),
                                     radius: 10000
                                 }).then(({ data }) => {
                                     const loc = data.location;
                                     if (!data.links.length) return getRandomLocation(n);
-                                    console.log(loc);
                                     realPos.current = [loc.latLng.lat(), loc.latLng.lng()];
                                     pano.setPano(loc.pano);
                                     pano.setZoom(0);
