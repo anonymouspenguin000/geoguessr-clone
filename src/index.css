@@ -4,7 +4,10 @@
     --border: 2px solid;
     --sidebar-border: 5px solid;
     --white-color-transform: brightness(0.6);
+
     --size-mul: 1;
+    --mm-wid: 0;
+    --mm-hgt: 0;
 
     --cprimary: #000020;
     --ctsp-bg: rgba(255, 255, 255, 0.05);

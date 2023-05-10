@@ -1,3 +1,3 @@
-export default function spbw(...strs) {
-    return strs.filter(Boolean).join(' ');
-}
+const spbw = (...strs) => strs.filter(Boolean).join(' ');
+
+export default spbw;
