@@ -57,6 +57,7 @@ function Footer() {
                                 <li>ReactJS</li>
                                 <li>Google Maps API</li>
                                 <li>Street View API</li>
+                                <li>Turf</li>
                             </ul>
                         </div>
                     </div>
@@ -65,7 +66,7 @@ function Footer() {
             <div className={cls.part_bottom}>
                 <div className={spbw('container', cls.container)}>
                     <p>
-                        &copy; NaN undefined
+                        &copy; 2023 Anopeng
                     </p>
                     <p>
                         My GitHub:{' '}
