@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import spbw from "../../../utils/spbw";
+import spbw from '../../../utils/spbw';
 import cls from './dropdown.module.css';
 
 function Dropdown({ className, optionList, ...props }) {

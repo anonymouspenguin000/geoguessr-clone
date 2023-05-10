@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import spbw from "../../../utils/spbw";
+import spbw from '../../../utils/spbw';
 import quitImg from '../../../assets/img/quit.png';
 import flagImg from '../../../assets/img/flag.png';
 import zoomInImg from '../../../assets/img/zoomIn.png';

@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import spbw from "../../utils/spbw";
+import spbw from '../../utils/spbw';
 import cls from './summary-card.module.css';
 
 function SummaryCard({ className, title, value, icon }) {

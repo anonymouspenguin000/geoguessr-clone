@@ -1,14 +1,14 @@
-import {Wrapper} from "@googlemaps/react-wrapper";
-import PropTypes from "prop-types";
+import {Wrapper} from '@googlemaps/react-wrapper';
+import PropTypes from 'prop-types';
 
-import Map from "../UI/Map/Map";
+import Map from '../UI/Map/Map';
 
-import spbw from "../../utils/spbw";
-import arrToLLObj from "../../utils/arr-to-ll-obj";
-import genRandomCoords from "../../utils/random/gen-random-coords";
+import spbw from '../../utils/spbw';
+import arrToLLObj from '../../utils/arr-to-ll-obj';
+import genRandomCoords from '../../utils/random/gen-random-coords';
 
-import api from "../../config/api";
-import eventValues from "../../config/events.json";
+import api from '../../config/api';
+import eventConfig from '../../config/events.json';
 
 function PanoramaGoogle({ className, getParams, utils, realPos }) {
     const setZoom = (pano, zoom, incr = false) => pano.setZoom(incr ? pano.getZoom() + zoom : zoom);
@@ -47,9 +47,9 @@ function PanoramaGoogle({ className, getParams, utils, realPos }) {
                     getRandomLocation(10);
 
                     pano.addListener('pov_changed', () => utils.compass.setAngle(360 - pano.getPov().heading));
-                    window.addEventListener(eventValues.gGoToStart, () => pano.setPosition(arrToLLObj(realPos.current)));
-                    window.addEventListener(eventValues.gZoomIn, () => setZoom(pano, 0.5, true));
-                    window.addEventListener(eventValues.gZoomOut, () => setZoom(pano, -0.5, true));
+                    window.addEventListener(eventConfig.gGoToStart, () => pano.setPosition(arrToLLObj(realPos.current)));
+                    window.addEventListener(eventConfig.gZoomIn, () => setZoom(pano, 0.5, true));
+                    window.addEventListener(eventConfig.gZoomOut, () => setZoom(pano, -0.5, true));
                 }}
             />
         </Wrapper>
@@ -57,9 +57,9 @@ function PanoramaGoogle({ className, getParams, utils, realPos }) {
 }
 PanoramaGoogle.propTypes = {
     className: PropTypes.string,
-    getParams: PropTypes.object,
-    utils: PropTypes.object,
-    realPos: PropTypes.object
+    getParams: PropTypes.object.isRequired,
+    utils: PropTypes.object.isRequired,
+    realPos: PropTypes.object.isRequired
 };
 
 export default PanoramaGoogle;

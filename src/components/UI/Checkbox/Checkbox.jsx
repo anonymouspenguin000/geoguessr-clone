@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import spbw from "../../../utils/spbw";
+import spbw from '../../../utils/spbw';
 
 function Checkbox({className, ...props}) {
     return (

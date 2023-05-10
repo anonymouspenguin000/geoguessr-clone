@@ -1,23 +1,22 @@
-import {useState} from "react";
-import PropTypes from "prop-types";
+import {useState} from 'react';
+import PropTypes from 'prop-types';
 
-import Checkbox from "../UI/Checkbox/Checkbox";
-import Button from "../UI/Button/Button";
-import SummarySection from "../SummarySection/SummarySection";
+import Checkbox from '../UI/Checkbox/Checkbox';
+import Button from '../UI/Button/Button';
 
-import storageValues from '../../config/storage.json';
-import cls from "./summary-settings.module.css";
+import storageConfig from '../../config/storage.json';
+import cls from './summary-settings.module.css';
 
 function SummarySettings({ history }) {
-    const noProgress = !(history || []).length;
-    const [pauseLog, setPauseLog] = useState(JSON.parse(localStorage.getItem(storageValues.pref) || '{}')?.pauseProgress || false);
+    const noProgress = !history.length;
+    const [pauseLog, setPauseLog] = useState(JSON.parse(localStorage.getItem(storageConfig.pref) || '{}')?.pauseProgress || false);
 
-    const onPauseCbChange = e => {
+    const onPauseChange = e => {
         const val = e.target.checked;
-        localStorage.setItem(storageValues.pref, `{"pauseProgress": ${val}}`);
+        localStorage.setItem(storageConfig.pref, `{"pauseProgress": ${val}}`);
         setPauseLog(val);
     }
-    const onExpProgressClick = () => {
+    const onExportClick = () => {
         if (noProgress) return;
 
         const expLink = document.createElement('a');
@@ -26,7 +25,7 @@ function SummarySettings({ history }) {
         expLink.href = URL.createObjectURL(new Blob([window.btoa(encodeURIComponent(JSON.stringify(history)))], {type: 'text/plain'}));
         expLink.click();
     }
-    const onImpProgressClick = () => {
+    const onImportClick = () => {
         const fileElem = document.createElement('input');
         fileElem.type = 'file';
 
@@ -35,7 +34,7 @@ function SummarySettings({ history }) {
 
             const reader = new FileReader();
             reader.onload = () => {
-                localStorage.setItem(storageValues.hist, decodeURIComponent(atob(reader.result.toString())));
+                localStorage.setItem(storageConfig.hist, decodeURIComponent(atob(reader.result.toString())));
                 window.location.reload();
             }
 
@@ -44,7 +43,7 @@ function SummarySettings({ history }) {
 
         fileElem.click();
     }
-    const onDelProgressClick = () => {
+    const onDeleteClick = () => {
         if (noProgress || prompt('Type "DELETE" without quotes to continue.') !== 'DELETE') return;
         localStorage.clear();
         window.location.reload();
@@ -54,14 +53,14 @@ function SummarySettings({ history }) {
         <div>
             <div className={cls.option_set}>
                 <label>
-                    <Checkbox checked={pauseLog} onChange={onPauseCbChange} className="checkbox checkbox-mr" />
+                    <Checkbox checked={pauseLog} onChange={onPauseChange} className="checkbox checkbox-mr" />
                     Pause logging progress
                 </label>
             </div>
             <div className={cls.option_set}>
-                <Button onClick={onExpProgressClick}>Export</Button>
-                <Button onClick={onImpProgressClick}>Import</Button>
-                <Button onClick={onDelProgressClick} className="danger">Delete</Button>
+                <Button onClick={onExportClick}>Export</Button>
+                <Button onClick={onImportClick}>Import</Button>
+                <Button onClick={onDeleteClick} className="danger">Delete</Button>
             </div>
         </div>
     );
@@ -70,7 +69,7 @@ function SummarySettings({ history }) {
 SummarySettings.propTypes = {
     history: PropTypes.array
 };
-SummarySection.defaultProps = {
+SummarySettings.defaultProps = {
     history: []
 };
 

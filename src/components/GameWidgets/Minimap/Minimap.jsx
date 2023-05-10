@@ -1,18 +1,18 @@
 import {useState, useRef} from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import Button from "../../UI/Button/Button";
+import Button from '../../UI/Button/Button';
 
-import spbw from "../../../utils/spbw";
+import spbw from '../../../utils/spbw';
 
 import biggerImg from '../../../assets/img/minimap-bigger.png';
 import smallerImg from '../../../assets/img/minimap-smaller.png';
 import collapseImg from '../../../assets/img/toggle-minimap.png';
 
-import gameValues from '../../../config/game.json';
+import gameConfig from '../../../config/game.json';
 import cls from './minimap.module.css';
 
-const mmPatterns = gameValues.minimapPatterns;
+const mmPatterns = gameConfig.minimapPatterns;
 
 function Minimap({ children, guessDisabled, onGuess }) {
     const btnRowRef = useRef();

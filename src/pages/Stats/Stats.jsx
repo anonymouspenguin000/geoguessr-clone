@@ -1,18 +1,17 @@
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
-import HistoryTable from "../../components/HistoryTable/HistoryTable";
-import SummarySection from "../../components/SummarySection/SummarySection";
-import SummarySettings from "../../components/SummarySettings/SummarySettings";
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import HistoryTable from '../../components/HistoryTable/HistoryTable';
+import SummarySection from '../../components/SummarySection/SummarySection';
+import SummarySettings from '../../components/SummarySettings/SummarySettings';
 
-import calcGeoDistance from "../../utils/calc/calc-geo-distance";
-import calcAccuracy from "../../utils/calc/calc-accuracy";
-import calcPoints from "../../utils/calc/calc-points";
+import calcGeoDistance from '../../utils/calc/calc-geo-distance';
+import calcAccuracy from '../../utils/calc/calc-accuracy';
+import calcPoints from '../../utils/calc/calc-points';
 
-import storageValues from '../../config/storage.json';
+import storageConfig from '../../config/storage.json';
 
 function Stats() {
-    const rawHst = JSON.parse(localStorage.getItem(storageValues.hist) || '[]');
-
+    const rawHst = JSON.parse(localStorage.getItem(storageConfig.hist) || '[]');
     const hst = rawHst.map((row, idx) => {
         const rowClone = {...row};
 

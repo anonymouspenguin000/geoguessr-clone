@@ -1,6 +1,6 @@
-import Header from "../../components/Header/Header";
-import EnterGame from "../../components/EnterGame/EnterGame";
-import Footer from "../../components/Footer/Footer";
+import Header from '../../components/Header/Header';
+import EnterGame from '../../components/EnterGame/EnterGame';
+import Footer from '../../components/Footer/Footer';
 
 import cls from './home.module.css';
 

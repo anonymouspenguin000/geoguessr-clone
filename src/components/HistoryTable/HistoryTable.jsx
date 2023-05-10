@@ -1,16 +1,16 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import Table from "../UI/Table/Table";
+import Table from '../UI/Table/Table';
 
-import geoUrl from "../../utils/geo-url";
-import strCut from "../../utils/str-cut";
-import readablePercentage from "../../utils/readable/readable-percentage";
-import readableTime from "../../utils/readable/readable-time";
-import readableDate from "../../utils/readable/readable-date";
-import readableDistance from "../../utils/readable/readable-distance";
+import geoUrl from '../../utils/geo-url';
+import strCut from '../../utils/str-cut';
+import readablePercentage from '../../utils/readable/readable-percentage';
+import readableTime from '../../utils/readable/readable-time';
+import readableDate from '../../utils/readable/readable-date';
+import readableDistance from '../../utils/readable/readable-distance';
 
-import gameValues from '../../config/game.json';
-import cls from "./history-table.module.css";
+import gameConfig from '../../config/game.json';
+import cls from './history-table.module.css';
 
 function HistoryTable({ history }) {
     const colNameOrder = ['id', 'rg', 'gp', 'rp', 'ds', 'ac', 'tm', 'pt', 'dt'];
@@ -42,7 +42,7 @@ function HistoryTable({ history }) {
                     if (rowIdx !== undefined) switch (colId) {
                         case 'rg':
                             return {
-                                $: gameValues.regionNames[col]
+                                $: gameConfig.regionNames[col]
                             };
                         case 'gp':
                         case 'rp':

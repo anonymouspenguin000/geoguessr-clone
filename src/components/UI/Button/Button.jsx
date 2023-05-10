@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import spbw from "../../../utils/spbw";
+import spbw from '../../../utils/spbw';
 import cls from './button.module.css';
 
 function Button({ className, children, ...props}) {

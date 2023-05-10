@@ -1,16 +1,16 @@
 import {useState, useRef, useEffect} from 'react';
 
-import GameResultsGoogle from "../../components/GameResultsGoogle/GameResultsGoogle";
-import GameUIGoogle from "../../components/GameUIGoogle/GameUIGoogle";
-import PanoramaGoogle from "../../components/PanoramaGoogle/PanoramaGoogle";
+import GameResultsGoogle from '../../components/GameResultsGoogle/GameResultsGoogle';
+import GameUIGoogle from '../../components/GameUIGoogle/GameUIGoogle';
+import PanoramaGoogle from '../../components/PanoramaGoogle/PanoramaGoogle';
 
-import readableTime from "../../utils/readable/readable-time";
-import mapMarkers from "../../utils/map-markers";
+import readableTime from '../../utils/readable/readable-time';
+import mapMarkers from '../../utils/map-markers';
 
-import eventValues from '../../config/events.json';
+import eventConfig from '../../config/events.json';
 import cls from './game.module.css';
 
-window.addEventListener(eventValues.gQuit, () => {
+window.addEventListener(eventConfig.gQuit, () => {
     window.location.href = '/';
 });
 
@@ -48,10 +48,10 @@ function Game() {
     utils.timer.ref = useRef();
 
     const markers = useRef(mapMarkers()).current;
-    const [gameEnd, setGameEnd] = useState(false);
 
-    const realPos = useRef();
+    const realPos = useRef(null);
     const [guessPos, setGuessPos] = useState(null);
+    const [gameEnd, setGameEnd] = useState(false);
 
     useEffect(() => {
         window.onbeforeunload = () => true;
@@ -64,15 +64,17 @@ function Game() {
                     classNames={{minimap: cls.minimap}}
                     {...{getParams, utils, realPos, guessPos, markers}}
                 />
-                : <GameUIGoogle
-                    classNames={{game_ui: cls.ui, minimap: cls.minimap, place_point: cls.place_point}}
-                    {...{getParams, utils, realPos, guessPos, markers, setGuessPos, setGameEnd}}
-                />
+                : <>
+                    <GameUIGoogle
+                        classNames={{game_ui: cls.ui, minimap: cls.minimap, place_point: cls.place_point}}
+                        {...{getParams, utils, realPos, guessPos, markers, setGuessPos, setGameEnd}}
+                    />
+                    <PanoramaGoogle
+                        className={cls.pano}
+                        {...{getParams, utils, realPos}}
+                    />
+                </>
             }
-            {!gameEnd && <PanoramaGoogle
-                className={cls.pano}
-                {...{getParams, utils, realPos}}
-            />}
         </div>
     );
 }

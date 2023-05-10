@@ -1,5 +1,5 @@
 const readableTime = s => {
-    if (s === Infinity) s = 0;
+    if (s === Infinity) return '-';
     const _norm = n => n < 10 ? '0' + n : n;
     const
         _sec = _norm(s % 60),

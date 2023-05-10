@@ -1,7 +1,7 @@
 import spbw from "../../utils/spbw";
 
+import origLogo from '../../assets/img/original.svg';
 import cls from './footer.module.css';
-import origlogo from '../../assets/img/original.svg';
 
 function Footer() {
     return (
@@ -20,7 +20,7 @@ function Footer() {
                         </p>
                         <div className={cls.section_image}>
                             <a href="https://geoguessr.com/" target="_blank" rel="noreferrer">
-                                <img src={origlogo} alt="GeoGuessr" />
+                                <img src={origLogo} alt="GeoGuessr" />
                             </a>
                         </div>
                     </div>

@@ -1,16 +1,16 @@
-import PropTypes from "prop-types";
-import {Wrapper} from "@googlemaps/react-wrapper";
+import PropTypes from 'prop-types';
+import {Wrapper} from '@googlemaps/react-wrapper';
 
-import GameResults from "../GameResults/GameResults";
-import Map from "../UI/Map/Map";
+import GameResults from '../GameResults/GameResults';
+import Map from '../UI/Map/Map';
 
-import arrToLLObj from "../../utils/arr-to-ll-obj";
-import geoUrl from "../../utils/geo-url";
+import arrToLLObj from '../../utils/arr-to-ll-obj';
+import geoUrl from '../../utils/geo-url';
 
-import guessPin from "../../assets/img/guess-pin.png";
-import realPin from "../../assets/img/real-pin.png";
+import guessPin from '../../assets/img/guess-pin.png';
+import realPin from '../../assets/img/real-pin.png';
 
-import api from "../../config/api";
+import api from '../../config/api';
 
 function GameResultsGoogle({ classNames, getParams, utils, realPos, guessPos, markers }) {
     return (
@@ -53,12 +53,12 @@ function GameResultsGoogle({ classNames, getParams, utils, realPos, guessPos, ma
     );
 }
 GameResultsGoogle.propTypes = {
-    classNames: PropTypes.object,
-    getParams: PropTypes.object,
-    utils: PropTypes.object,
-    realPos: PropTypes.object,
-    guessPos: PropTypes.array,
-    markers: PropTypes.object
+    classNames: PropTypes.object.isRequired,
+    getParams: PropTypes.object.isRequired,
+    utils: PropTypes.object.isRequired,
+    realPos: PropTypes.object.isRequired,
+    guessPos: PropTypes.array.isRequired,
+    markers: PropTypes.object.isRequired
 };
 
 export default GameResultsGoogle;

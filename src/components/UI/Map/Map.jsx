@@ -1,5 +1,5 @@
-import {useRef, useEffect} from "react";
-import PropTypes from "prop-types";
+import {useRef, useEffect} from 'react';
+import PropTypes from 'prop-types';
 
 function Map({ className, options, onMount, type = 'map' }) {
     const mapCreated = useRef(false);
@@ -26,8 +26,8 @@ Map.propTypes = {
 };
 Map.defaultProps = {
     className: '',
-    onMount: () => {},
-    effect: () => {}
+    options: {},
+    type: 'map'
 };
 
 export default Map;

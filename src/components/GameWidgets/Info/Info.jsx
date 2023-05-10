@@ -1,23 +1,23 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 import regionImg from '../../../assets/img/region.png';
-import gameValues from '../../../config/game.json';
+import gameConfig from '../../../config/game.json';
 
-function Info({ infoData }) {
+function Info({ info }) {
     return (
         <div className="widget-group">
             <div className="widget-card">
                 <img src={regionImg} alt="Region" className="img-inv" />
-                <span>{gameValues.regionNames[infoData?.region || '']}</span>
+                <span>{gameConfig.regionNames[info?.region || '']}</span>
             </div>
         </div>
     );
 }
 Info.propTypes = {
-    infoData: PropTypes.object
+    info: PropTypes.object
 };
 Info.defaultProps = {
-    infoData: {}
+    info: {}
 };
 
 export default Info;

@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import SummaryCard from "../SummaryCard/SummaryCard";
-import spbw from "../../utils/spbw";
+import SummaryCard from '../SummaryCard/SummaryCard';
+import spbw from '../../utils/spbw';
 
 import cls from './summary-row.module.css';
 
@@ -14,9 +14,11 @@ function SummaryRow({ className, cards }) {
 }
 
 SummaryRow.propTypes = {
+    className: PropTypes.string,
     cards: PropTypes.array
 };
 SummaryRow.defaultProps = {
+    className: '',
     cards: []
 };
 

@@ -1,13 +1,13 @@
-import {useState} from "react";
-import PropTypes from "prop-types";
+import {useState} from 'react';
+import PropTypes from 'prop-types';
 
-import Dropdown from "../UI/Dropdown/Dropdown";
-import Button from "../UI/Button/Button";
-import Checkbox from "../UI/Checkbox/Checkbox";
+import Dropdown from '../UI/Dropdown/Dropdown';
+import Button from '../UI/Button/Button';
+import Checkbox from '../UI/Checkbox/Checkbox';
 
-import spbw from "../../utils/spbw";
+import spbw from '../../utils/spbw';
 
-import gameValues from '../../config/game.json';
+import gameConfig from '../../config/game.json';
 import cls from './enter-game.module.css';
 
 function EnterGame({ className }) {
@@ -36,13 +36,9 @@ function EnterGame({ className }) {
     return (
         <div className={spbw(cls.enter_game, className)}>
             <form action="/game" method="get">
-                <Dropdown className={cls.form_item} optionList={Object.entries(gameValues.regionNames)} name="region" />
+                <Dropdown className={cls.form_item} optionList={Object.entries(gameConfig.regionNames)} name="region" />
                 <fieldset hidden={!expOpened} className={spbw('fieldset', cls.form_item)}>
                     <legend className="fieldset-legend">Experiments</legend>
-                    {/*<label className="fieldset-item">*/}
-                    {/*    <Checkbox name="smlscrn" className="checkbox checkbox-mr"/>*/}
-                    {/*    Small screen*/}
-                    {/*</label>*/}
                     Empty :(
                 </fieldset>
                 <fieldset hidden={!prefOpened} className={spbw('fieldset', cls.form_item)}>

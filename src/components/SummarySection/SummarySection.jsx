@@ -1,16 +1,16 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import SummaryRow from "../SummaryRow/SummaryRow";
+import SummaryRow from '../SummaryRow/SummaryRow';
 
-import readableTime from "../../utils/readable/readable-time";
-import readablePercentage from "../../utils/readable/readable-percentage";
+import readableTime from '../../utils/readable/readable-time';
+import readablePercentage from '../../utils/readable/readable-percentage';
 
-import regionImg from "../../assets/img/region.png";
-import timerImg from "../../assets/img/timer.png";
-import pointsImg from "../../assets/img/points.png";
-import accuracyImg from "../../assets/img/accuracy.png";
+import regionImg from '../../assets/img/region.png';
+import timerImg from '../../assets/img/timer.png';
+import pointsImg from '../../assets/img/points.png';
+import accuracyImg from '../../assets/img/accuracy.png';
 
-import cls from "./summary-section.module.css";
+import cls from './summary-section.module.css';
 
 function SummarySection({ history }) {
     const smTotal = {
@@ -51,7 +51,7 @@ function SummarySection({ history }) {
                 <SummaryRow className={cls.row} cards={[
                     {
                         title: 'Locations discovered',
-                        value: smTotal.locations.toString(),
+                        value: String(smTotal.locations),
                         icon: regionImg
                     },
                     {
@@ -61,7 +61,7 @@ function SummarySection({ history }) {
                     },
                     {
                         title: 'Points',
-                        value: smTotal.points.toString(),
+                        value: String(smTotal.points),
                         icon: pointsImg
                     }
                 ]} />
@@ -76,12 +76,12 @@ function SummarySection({ history }) {
                     },
                     {
                         title: 'Time guessing',
-                        value: smBest.time === Infinity ? '-' : readableTime(smBest.time),
+                        value: readableTime(smBest.time),
                         icon: timerImg
                     },
                     {
                         title: 'Points for a location',
-                        value: smBest.points.toString(),
+                        value: String(smBest.points),
                         icon: pointsImg
                     }
                 ]} />
@@ -96,12 +96,12 @@ function SummarySection({ history }) {
                     },
                     {
                         title: 'Time guessing',
-                        value: smAverage.time === Infinity ? '-' : readableTime(smAverage.time),
+                        value: readableTime(smAverage.time),
                         icon: timerImg
                     },
                     {
                         title: 'Points for a location',
-                        value: smAverage.points.toString(),
+                        value: String(smAverage.points),
                         icon: pointsImg
                     }
                 ]} />

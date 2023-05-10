@@ -1,9 +1,9 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 import Utils from '../GameWidgets/Utils/Utils';
 import Info from '../GameWidgets/Info/Info';
-import Buttons from "../GameWidgets/Buttons/Buttons";
-import Minimap from "../GameWidgets/Minimap/Minimap";
+import Buttons from '../GameWidgets/Buttons/Buttons';
+import Minimap from '../GameWidgets/Minimap/Minimap';
 
 function GameUI({ className, utils, minimap, infoData, buttonEvents }) {
     return (
@@ -11,9 +11,9 @@ function GameUI({ className, utils, minimap, infoData, buttonEvents }) {
             <div className="widget-row">
                 <Utils
                     className={!Object.values(utils || {}).some(el => el?.shown) ? 'invisible' : ''}
-                    utilData={utils}
+                    utils={utils}
                 />
-                <Info infoData={infoData}/>
+                <Info info={infoData}/>
             </div>
             <div className="widget-row widget-row-bottom">
                 <Buttons events={buttonEvents} />

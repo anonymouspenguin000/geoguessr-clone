@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import spbw from "../../../utils/spbw";
-import uniqueTimestamp from "../../../utils/unique-timestamp";
+import spbw from '../../../utils/spbw';
+import uniqueTimestamp from '../../../utils/unique-timestamp';
 
 import cls from './table.module.css';
 
@@ -17,9 +17,7 @@ function Table({ className, titles, data, rowIds, colReplacer }) {
             $: col
         };
 
-        if (colReplacer) {
-            Object.assign(resProps, colReplacer(colId, col, rowId) || {});
-        }
+        if (colReplacer) Object.assign(resProps, colReplacer(colId, col, rowId) || {});
 
         return resProps;
     };
@@ -27,12 +25,12 @@ function Table({ className, titles, data, rowIds, colReplacer }) {
     return (
         <table className={spbw(cls.table, className)}>
             {!!titles.length && <thead>
-            <tr>
-                {titles.map(title => {
-                    const {$: inner, ...colProps} = getColData(getTitleId(title), title.value);
-                    return <th {...colProps}>{inner}</th>
-                })}
-            </tr>
+                <tr>
+                    {titles.map(title => {
+                        const {$: inner, ...colProps} = getColData(getTitleId(title), title.value);
+                        return <th {...colProps}>{inner}</th>
+                    })}
+                </tr>
             </thead>}
             <tbody>
             {data.map((row, rowIdx) => {

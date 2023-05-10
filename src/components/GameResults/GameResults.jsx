@@ -1,17 +1,17 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-import spbw from "../../utils/spbw";
-import strCut from "../../utils/str-cut";
-import geoUrl from "../../utils/geo-url";
-import readableDistance from "../../utils/readable/readable-distance";
-import readableTime from "../../utils/readable/readable-time";
-import readablePercentage from "../../utils/readable/readable-percentage";
+import spbw from '../../utils/spbw';
+import strCut from '../../utils/str-cut';
+import geoUrl from '../../utils/geo-url';
+import readableDistance from '../../utils/readable/readable-distance';
+import readableTime from '../../utils/readable/readable-time';
+import readablePercentage from '../../utils/readable/readable-percentage';
 
-import calcGeoDistance from "../../utils/calc/calc-geo-distance";
-import calcAccuracy from "../../utils/calc/calc-accuracy";
-import calcPoints from "../../utils/calc/calc-points";
+import calcGeoDistance from '../../utils/calc/calc-geo-distance';
+import calcAccuracy from '../../utils/calc/calc-accuracy';
+import calcPoints from '../../utils/calc/calc-points';
 
-import gameValues from '../../config/game.json';
+import gameConfig from '../../config/game.json';
 import cls from './game-results.module.css';
 
 const formulas = `
@@ -35,9 +35,9 @@ A - Accuracy [%]
 P - Points [1]
 E - Earth Circumference [meters]
 F - TPE [1]
-I - TPE Time [seconds] = ${gameValues.value.tpeTime}
-U - TPE Multiplier [1] = ${gameValues.value.tpeMul}
-M - Max Points [1] = ${gameValues.value.maxPoints}
+I - TPE Time [seconds] = ${gameConfig.value.tpeTime}
+U - TPE Multiplier [1] = ${gameConfig.value.tpeMul}
+M - Max Points [1] = ${gameConfig.value.maxPoints}
 Floor - Rounding Down
 
 [Definitions]
@@ -61,7 +61,7 @@ function GameResults({ className, map, data }) {
                     <div className={cls.main}>
                         <div>
                             <p className={cls.col}>
-                                Region: <span className={cls.val}>{gameValues.regionNames[data.region]}</span>
+                                Region: <span className={cls.val}>{gameConfig.regionNames[data.region]}</span>
                             </p>
                         </div>
                         <div className={cls.row}>
@@ -97,7 +97,7 @@ function GameResults({ className, map, data }) {
                         <div className={cls.row}>
                             <p className={cls.col}>
                                 {/* eslint-disable-next-line */}
-                                <a className={cls.show_formulas} href="src/components#" onClick={(e) => {
+                                <a className={cls.show_formulas} href="#" onClick={(e) => {
                                     alert(formulas);
                                     e.preventDefault();
                                 }}>Show accuracy & points formulas</a>
@@ -114,10 +114,14 @@ function GameResults({ className, map, data }) {
 }
 
 GameResults.propTypes = {
-    className: PropTypes.string
+    className: PropTypes.string,
+    map: PropTypes.object,
+    data: PropTypes.object
 };
 GameResults.defaultProps = {
-    className: ''
+    className: '',
+    map: <span />,
+    data: {}
 };
 
 export default GameResults;
