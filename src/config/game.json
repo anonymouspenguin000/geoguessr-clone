@@ -1,8 +1,8 @@
 {
   "value": {
     "maxPoints": 25000,
-    "tpeTime": 30,
-    "tpeMul": 0.03
+    "tpeTime": 60,
+    "tpeMul": 0.02
   },
   "regionNames": {
     "wrl": "World",

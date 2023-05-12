@@ -42,7 +42,12 @@ function Footer() {
                                 </li>
                                 <li>
                                     Telegram:{' '}
-                                    <a href="https://t.me/vl_pnk" target="_blank" rel="noreferrer">@vl_pnk</a></li>
+                                    <a href="https://t.me/vl_pnk" target="_blank" rel="noreferrer">@vl_pnk</a>
+                                </li>
+                                <li>
+                                    Discord:{' '}
+                                    <a href="https://discordapp.com/users/911550482709905418" target="_blank" rel="noreferrer">AnonymousPenguin#5362</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
