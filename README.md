@@ -1,6 +1,6 @@
 # GeoGuessr Clone
 Original game: https://www.geoguessr.com/ <br>
-Clone: https://geoguessr-clone.github.io/
+Clone ([TEMPORARILY CLOSED](#temporarily-closed)): https://geoguessr-clone.github.io/
 
 ## About
 This is a clone of GeoGuessr, a popular geography game, where you need to guess the StreetView location. Initially,
@@ -24,3 +24,6 @@ the project (`npm start`) and open the URL the CLI says (usually it's `localhost
 - E-mail: [anopeng000@gmail.com](mailto:anopeng000@gmail.com)
 - Telegram: [@vl_pnk](https://t.me/vl_pnk)
 - Discord: [AnonymousPenguin#5362](https://discordapp.com/users/911550482709905418)
+
+## TEMPORARILY CLOSED
+The API key of geoguessr-clone.github.io has reached its req/mo limit, therefore the game prod is temporarily closed. While I'm working on it, you can try to run the code with your own API key ([described above](#wanna-run-it-yourself)). And if you're looking forward, check the game once a month.
